@@ -83,7 +83,7 @@ class R_LuckyCointScreen extends AppScreen {
 
     async waitForRewardGrantedTextIsShown () {
         try {
-            await this.rewardGrantedText.waitForDisplayed({ timeout: 90000 });
+            await this.rewardGrantedText.waitForDisplayed({ timeout: 65000 });
         } catch (error) {
             console.log("Reward granted text not found");
         }

@@ -361,30 +361,33 @@ describe("rakuten_super_point_screen", async () => {
         await (await sLuckycountScreen.closeAdButton).click();
         await driver.pause(2000);
       } else {
-        for (let index = 0; index < 3; index++) {
-          await driver.execute("mobile: shell", {
-            command: "input",
-            args: ["tap", "1000", "95"],
-            includeStderr: true,
-            timeout: 2000,
-          });
+        await driver.execute("mobile: shell", {
+          command: "input",
+          args: ["tap", "95", "95"],
+          includeStderr: true,
+          timeout: 2000,
+        });
+        await driver.pause(1000);
+        await driver.execute("mobile: shell", {
+          command: "input",
+          args: ["tap", "1000", "95"],
+          includeStderr: true,
+          timeout: 2000,
+        });
+        // await backToSuperPointApp();
+        for (let index = 0; index < 2; index++) {
           await driver.pause(2000);
-          // await driver.execute("mobile: shell", {
-          //   command: "input",
-          //   args: ["tap", "1000", "95"],
-          //   includeStderr: true,
-          //   timeout: 2000,
-          // });
-          // check current package, if not rakuten super point screen, then back to rakuten super point screen
-          let currentPackage = await driver.getCurrentPackage();
-          console.log("currentPackage: " + currentPackage);
-          if (currentPackage === config.RAKUTEN_SUPER_POINT_SCREEN_APP_ID) {
-            break;
-          }
-          await driver.pause(2000);
-          await backToSuperPointApp();
-          await driver.pause(45000);
+          await driver.back();
         }
+        await driver.pause(5000);
+
+        await driver.execute("mobile: shell", {
+          command: "input",
+          args: ["tap", "1000", "95"],
+          includeStderr: true,
+          timeout: 2000,
+        });
+        await driver.pause(5000);
 
         if (!(await S_TabBar.bottomIconIsDisplayed())) {
           await driver.back();

@@ -15,7 +15,7 @@
     "test:kuji": "npx wdio run wdio.apps.kuji.conf.js",
     "test:toshiru": "yarn install:toshiru && npx wdio run wdio.apps.toshiru.conf.js",
     "test:pointclub_toshiru": "yarn install:pointclub && yarn install:toshiru && npx wdio run wdio.apps.pointclub_toshiru.conf.js",
-    "test": "yarn install:all && npx wdio run wdio.conf.js"
+    "test": "npx wdio run wdio.conf.js"
   },
   "dependencies": {
     "@wdio/cli": "^9.29.1"
