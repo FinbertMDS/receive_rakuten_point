@@ -16,10 +16,6 @@ RUN_STATUS="FAILED"
 
 mkdir -p "$LOG_DIR"
 
-# kill firefox
-echo "Killing any existing Firefox processes..." | tee -a "$LOG_FILE"
-pkill -f firefox
-
 if [ ! -s "$RUN_SUMMARY_LOG" ]; then
   echo "# type | start | end | duration_sec | status | passed | failed | detail_log" >> "$RUN_SUMMARY_LOG"
 fi
@@ -105,5 +101,10 @@ echo "SUMMARY: $PASS passed, $FAIL failed" | tee -a "$LOG_FILE"
 echo "Finished: $(date '+%Y-%m-%d %H:%M:%S')" | tee -a "$LOG_FILE"
 echo "========================================" | tee -a "$LOG_FILE"
 
+# kill firefox
+echo "Killing any existing Firefox processes..." | tee -a "$LOG_FILE"
+pkill -f firefox
+
 # remove logs older than 7 days
+echo "Cleaning up old log files older than 7 days..." | tee -a "$LOG_FILE"
 find "$LOG_DIR" -type f -name "run_rakuten_*.log" -mtime +7 -exec rm {} \;
