@@ -16,6 +16,10 @@ RUN_STATUS="FAILED"
 
 mkdir -p "$LOG_DIR"
 
+# kill firefox
+echo "Killing any existing Firefox processes..." | tee -a "$LOG_FILE"
+pkill -f firefox
+
 if [ ! -s "$RUN_SUMMARY_LOG" ]; then
   echo "# type | start | end | duration_sec | status | passed | failed | detail_log" >> "$RUN_SUMMARY_LOG"
 fi
